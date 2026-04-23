@@ -23,7 +23,10 @@ jobs:
     - name: Decode Keystore
       working-directory: ./app
       run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > keystore.jks
-
+      
+    - name: Clean Gradle Cache
+      run: ./gradlew clean
+      
     - name: Build the app
       working-directory: ./
       #  执行 assembleRelease，并传入 Secret 环境变量
