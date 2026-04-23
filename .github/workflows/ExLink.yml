@@ -24,8 +24,10 @@ jobs:
       working-directory: ./app
       run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > keystore.jks
       
-    - name: Clean Gradle Cache
-      run: ./gradlew clean
+    - name: Clean Gradle Cache      
+      run: |
+        chmod +x gradlew
+        ./gradlew clean
       
     - name: Build the app
       working-directory: ./
@@ -35,7 +37,7 @@ jobs:
         KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
       run: |
-        chmod +x gradlew
+        #chmod +x gradlew
         ./gradlew :server:copyRelease --stacktrace
         ./gradlew :app:assembleRelease --stacktrace
         
