@@ -38,7 +38,7 @@ jobs:
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
       run: |
         #chmod +x gradlew
-        ./gradlew :server:copyRelease --stacktrace
+        #./gradlew :server:copyRelease --stacktrace
         ./gradlew :app:assembleRelease --stacktrace
         
     - name: Upload APK
