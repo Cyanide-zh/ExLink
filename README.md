@@ -20,4 +20,11 @@
 
 以及十分感谢 oott123 的帮助,陪我调 bug,给我提建议,帮我删 git 的历史密码,陪我打 steam.祝你早日找到女朋友`_(:з)∠)_`...
 
-[待办事项](toDoList.md)
+
+[原版项目](https://github.com/xloger/ExLink)
+
+和原版区别:
+
+1、将配置文件改为在/sdcard/Documents/文件夹下,以看起来更符合Android规范;
+
+2、可通过github actions直接编译apk。
