@@ -207,9 +207,9 @@ class HookMain : IXposedHookLoadPackage {
 
 
             //if (packageName == "com.tencent.mm") {
-            MyLog.log("进入兼容模式,弹窗让用户选择使用內建还是外置浏览器打开")
-            compatible(param, uri)
-            //return
+                MyLog.log("全局选择模式")
+                compatible(param, uri)
+                return
             //}
 
             openUrl(param, uri)
@@ -417,4 +417,3 @@ class HookMain : IXposedHookLoadPackage {
         private val EX_DAT = "ExDat"
     }
 }
-
