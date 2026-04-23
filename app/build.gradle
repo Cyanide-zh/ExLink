@@ -14,10 +14,14 @@ repositories {
 android {
     signingConfigs {
         config {
-            keyAlias 'xloger'
-            keyPassword KeyPassword
-            storeFile file('C:/Users/xloger/.android/XlogerAndroid.jks')
-            storePassword StorePassword
+            //keyAlias 'xloger'
+            //keyPassword KeyPassword
+            //storeFile file('C:/Users/xloger/.android/XlogerAndroid.jks')
+            //storePassword StorePassword            
+            storeFile file("keystore.jks") 
+            storePassword System.getenv("KEYSTORE_PASSWORD")
+            keyAlias System.getenv("KEY_ALIAS")
+            keyPassword System.getenv("KEY_PASSWORD")
         }
     }
     compileSdkVersion 26
