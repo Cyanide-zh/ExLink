@@ -42,7 +42,7 @@ class AppUtil {
                 appName = "QQ",
                 packageName = "com.tencent.mobileqq",
                 rules = setOf(Rule("com.tencent.mobileqq.activity.QQBrowserDelegationActivity", "url")),
-                whiteUrl = setOf("qzone.qq.com", "qun.qq.com", "jq.qq.com", "mqq.tenpay.com", "mp.qq.com", "yundong.qq.com"),
+                whiteUrl = setOf("qzone.qq.com", "qun.qq.com", "jq.qq.com", "mqq.tenpay.com", "mail.qq.com", "mp.qq.com", "news.qq.com", "yundong.qq.com"),
                 isUse = true,
                 isUserBuild = false,
                 isTest = false
