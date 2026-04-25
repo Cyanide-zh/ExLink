@@ -197,13 +197,13 @@ class HookMain : IXposedHookLoadPackage {
 
 
 
-            //if (packageName == "com.tencent.mm") {
-                MyLog.log("进入全局弹窗模式")
+            if ((packageName == "com.tencent.mm")||(packageName == "com.tencent.mobileqq")) {
+                MyLog.log("进入弹窗模式")
                 compatible(param, uri)
                 return
-            //}
+            }
 
-            //openUrl(param, uri)
+            openUrl(param, uri)
         }
 
         private fun parseUrl(rule: Rule, param: XC_MethodHook.MethodHookParam): String {
@@ -335,32 +335,7 @@ class HookMain : IXposedHookLoadPackage {
 
 
             val intent = param!!.args[0] as Intent
-//            val judge1 = intent.getStringExtra("preChatName")
-//            val judge2 = intent.getStringExtra("prePublishId")
-//            val judge3 = intent.getStringExtra("preUsername")
-//            MyLog.log("judge1:" + judge1 + "judge2:" + judge2 + "judge3:" + judge3)
-//
-//            if (judge1 == null && judge2 == null && judge3 == null) {
-//                isOpenWithOut1 = true
-//            }
-//
-//            val judge4 = intent.getStringExtra("version_name")
-//            val judge5 = intent.getStringExtra("KAppId")
-//            val judge6 = intent.getStringExtra("srcDisplayname")
-//            MyLog.log("judge4:" + judge4 + "judge5:" + judge5 + "judge6:" + judge6)
-//
-//            if (judge4 != null && judge5 != null && judge6 == null) {
-//                isOpenWithOut2 = true
-//            }
-//
-//            val judge7 = intent.getStringExtra("srcUsername")
-//            val judge8 = intent.getStringExtra("message_index")
-//            val judge9 = intent.getStringExtra("message_id")
-//            MyLog.log("judge7:" + judge7 + "judge8:" + judge8 + "judge9:" + judge9)
-//
-//            if (judge7 == null && judge8 == null && judge9 == null) {
-//                isOpenWithOut3 = true
-//            }
+
 
             MyLog.log("extras:" + intent.extras)
 
