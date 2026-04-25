@@ -199,11 +199,32 @@ class HookMain : IXposedHookLoadPackage {
 
             if ((packageName == "com.tencent.mm")||(packageName == "com.tencent.mobileqq")) {
                 MyLog.log("进入弹窗模式")
-                compatible(param, uri)
-                return
+                //compatible(param, uri)
+                var isOpenWithOut1 = false
+                var isOpenWithOut2 = false
+                var isOpenWithOut3 = false
+                val intent = param!!.args[0] as Intent   
+                MyLog.log("extras:" + intent.extras)
+                val activity = param.thisObject as Activity    
+                val dialog = AlertDialog.Builder(activity)
+                        .setItems(arrayOf("內建浏览器打开", "外部浏览器打开")) { dialogInterface, which ->
+                            when (which) {
+                                0 -> {
+                                    return
+                                    //intent.putExtra("exlink", true)
+                                    //activity.startActivity(intent)
+                                }
+                                1 -> {
+                                    openUrl(param, uri)
+                                }
+                            }
+                        }.create()
+                dialog.show()
+                param.result = null
+                //return
             }
 
-            openUrl(param, uri)
+            //openUrl(param, uri)
         }
 
         private fun parseUrl(rule: Rule, param: XC_MethodHook.MethodHookParam): String {
@@ -328,34 +349,34 @@ class HookMain : IXposedHookLoadPackage {
          * @param param 传入的参数
          * @param uri 需要被打开的链接
          */
-        private fun compatible(param: XC_MethodHook.MethodHookParam?, uri: Uri) {
-            var isOpenWithOut1 = false
-            var isOpenWithOut2 = false
-            var isOpenWithOut3 = false
+       // private fun compatible(param: XC_MethodHook.MethodHookParam?, uri: Uri) {
+          //  var isOpenWithOut1 = false
+            //var isOpenWithOut2 = false
+         //   var isOpenWithOut3 = false
 
 
-            val intent = param!!.args[0] as Intent
+        //    val intent = param!!.args[0] as Intent
 
 
-            MyLog.log("extras:" + intent.extras)
+          //  MyLog.log("extras:" + intent.extras)
 
-            val activity = param.thisObject as Activity
+          //  val activity = param.thisObject as Activity
 
-            val dialog = AlertDialog.Builder(activity)
-                    .setItems(arrayOf("內建浏览器打开", "外部浏览器打开")) { dialogInterface, which ->
-                        when (which) {
-                            0 -> {
-                                intent.putExtra("exlink", true)
-                                activity.startActivity(intent)
-                            }
-                            1 -> {
-                                openUrl(param, uri)
-                            }
-                        }
-                    }.create()
-            dialog.show()
+         //   val dialog = AlertDialog.Builder(activity)
+             //       .setItems(arrayOf("內建浏览器打开", "外部浏览器打开")) { dialogInterface, which ->
+            //            when (which) {
+                 //           0 -> {
+              //                  intent.putExtra("exlink", true)
+                       //         activity.startActivity(intent)
+                    //        }
+                  //          1 -> {
+                   //             openUrl(param, uri)
+                  //          }
+                  //      }
+                //    }.create()
+          //  dialog.show()
 
-            param.result = null
+        //    param.result = null
 
 //            Toast.makeText((param.thisObject as Activity),"$uri",Toast.LENGTH_SHORT).show()
 
@@ -366,7 +387,7 @@ class HookMain : IXposedHookLoadPackage {
 //            } else {
 //                MyLog.log("判断需要用内置浏览器打开")
 //            }
-        }
+       // }
 
 
         private fun intentToString(intent: Intent) {
