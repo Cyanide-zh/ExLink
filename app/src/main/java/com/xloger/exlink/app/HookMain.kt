@@ -194,25 +194,16 @@ class HookMain : IXposedHookLoadPackage {
 
             val uri = Uri.parse(exUrl)
 
-            //检查白名单
-            for (s in whiteUrl) {
-                if (s == uri.host) {
-                    MyLog.log("处于白名单之中，跳过")
-                    return
-                } else if (StreamUtil.isSecondLevelDomain(s, uri.host)) {
-                    MyLog.log("为" + s + "的二级域名，跳过")
-                    return
-                }
-            }
 
 
-            if (packageName == "com.tencent.mm") {
-                MyLog.log("进入匹配微信模式")
-                compatibleWeChat(param, uri)
+
+            //if (packageName == "com.tencent.mm") {
+                MyLog.log("进入全局弹窗模式")
+                compatible(param, uri)
                 return
-            }
+            //}
 
-            openUrl(param, uri)
+            //openUrl(param, uri)
         }
 
         private fun parseUrl(rule: Rule, param: XC_MethodHook.MethodHookParam): String {
@@ -337,7 +328,7 @@ class HookMain : IXposedHookLoadPackage {
          * @param param 传入的参数
          * @param uri 需要被打开的链接
          */
-        private fun compatibleWeChat(param: XC_MethodHook.MethodHookParam?, uri: Uri) {
+        private fun compatible(param: XC_MethodHook.MethodHookParam?, uri: Uri) {
             var isOpenWithOut1 = false
             var isOpenWithOut2 = false
             var isOpenWithOut3 = false
@@ -376,7 +367,7 @@ class HookMain : IXposedHookLoadPackage {
             val activity = param.thisObject as Activity
 
             val dialog = AlertDialog.Builder(activity)
-                    .setItems(arrayOf("微信浏览器打开", "手机浏览器打开")) { dialogInterface, which ->
+                    .setItems(arrayOf("內建浏览器打开", "外部浏览器打开")) { dialogInterface, which ->
                         when (which) {
                             0 -> {
                                 intent.putExtra("exlink", true)
@@ -417,3 +408,4 @@ class HookMain : IXposedHookLoadPackage {
         private val EX_DAT = "ExDat"
     }
 }
+
