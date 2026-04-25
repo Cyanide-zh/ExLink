@@ -210,7 +210,7 @@ class HookMain : IXposedHookLoadPackage {
                         .setItems(arrayOf("內建浏览器打开", "外部浏览器打开")) { dialogInterface, which ->
                             when (which) {
                                 0 -> {
-                                    return
+                                    return@setItems
                                     //intent.putExtra("exlink", true)
                                     //activity.startActivity(intent)
                                 }
