@@ -22,7 +22,7 @@ jobs:
     #  将 Base64 恢复为 Keystore 文件
     - name: Decode Keystore
       working-directory: ./app
-      run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > keystore.jks
+      run: echo "starting at ""$(date "+%Y-%m-%d_%H-%M-%S")" ; echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > keystore.jks
       
     - name: Clean Gradle Cache      
       run: |
@@ -40,6 +40,7 @@ jobs:
         chmod +x gradlew
         #./gradlew :server:copyRelease --stacktrace
         ./gradlew :app:assembleRelease --stacktrace
+        echo "finishing at ""$(date "+%Y-%m-%d_%H-%M-%S")"
         
     - name: Upload APK
       uses: actions/upload-artifact@v4
