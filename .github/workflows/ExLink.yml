@@ -37,7 +37,7 @@ jobs:
         KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
       run: |
-        #chmod +x gradlew
+        chmod +x gradlew
         #./gradlew :server:copyRelease --stacktrace
         ./gradlew :app:assembleRelease --stacktrace
         
