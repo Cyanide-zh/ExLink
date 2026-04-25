@@ -206,20 +206,22 @@ class HookMain : IXposedHookLoadPackage {
                 val intent = param!!.args[0] as Intent   
                 MyLog.log("extras:" + intent.extras)
                 val activity = param.thisObject as Activity    
-                val dialog = AlertDialog.Builder(activity)
-                        .setItems(arrayOf("內建浏览器打开", "外部浏览器打开")) { dialogInterface, which ->
-                            when (which) {
-                                0 -> {
-                                    return@setItems
-                                    //intent.putExtra("exlink", true)
-                                    //activity.startActivity(intent)
+                android.os.Handler(android.os.Looper.getMainLooper()).post {
+                    val dialog = AlertDialog.Builder(activity)
+                            .setItems(arrayOf("內建浏览器打开", "外部浏览器打开")) { dialogInterface, which ->
+                                when (which) {
+                                    0 -> {
+                                        return@setItems
+                                        //intent.putExtra("exlink", true)
+                                        //activity.startActivity(intent)
+                                    }
+                                    1 -> {
+                                        openUrl(param, uri)
+                                    }
                                 }
-                                1 -> {
-                                    openUrl(param, uri)
-                                }
-                            }
-                        }.create()
-                dialog.show()
+                            }.create()
+                    dialog.show()
+                }
                 param.result = null
                 //return
             }
